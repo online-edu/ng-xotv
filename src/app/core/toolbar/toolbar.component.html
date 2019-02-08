@@ -1,0 +1,18 @@
+<mat-toolbar color="primary" class="mat-elevation-z6 xotv-toolbar">
+  <button mat-icon-button (click)="open()" aria-label="menu" value="menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <p class="xotv-toolbar__title">
+    XoTV<span class="sub">Powered by Unsplash API</span>
+  </p>
+  <span class="xotv-toolbar__spacer"></span>
+  <button
+    (click)="onLogout()"
+    mat-icon-button
+    matTooltip="Profile"
+    matTooltipPosition="left"
+  >
+    <mat-icon>account_circle</mat-icon>
+  </button>
+</mat-toolbar>
