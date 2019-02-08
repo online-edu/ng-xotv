@@ -1,10 +1,11 @@
-import { Component } from "@angular/core";
+import { Component, OnDestroy } from "@angular/core";
 import { BreakpointObserver } from "@angular/cdk/layout";
 
 import { Subscription } from "rxjs";
 
 import { AppService } from "./app.service";
-import { DATA_NOT_FOUND } from "./shared/assets/data";
+import { DATA_NOT_FOUND } from "./shared/graphics";
+import { GlobalErrorHandler } from "./core/services/error-handler";
 
 const OPERATOR_MENU_GAP_LARGE = 64;
 const OPERATOR_MENU_GAP_SMALL = 54;
@@ -14,7 +15,7 @@ const OPERATOR_MENU_GAP_SMALL = 54;
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"]
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy {
   users: any = [];
   selectedUser: any;
   subscription: Subscription;
@@ -23,7 +24,8 @@ export class AppComponent {
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private appService: AppService
+    private appService: AppService,
+    private error: GlobalErrorHandler
   ) {}
 
   get extraSmallScreen() {
@@ -46,7 +48,6 @@ export class AppComponent {
 
   onKeyUp(e: any) {
     if (this.appService.validKeyStroke(e.keyCode)) {
-      console.log(e.keyCode);
       let query = e.target.value;
       if (query && query.length > 2) {
         this.loading = true;
@@ -54,9 +55,12 @@ export class AppComponent {
         this.subscription = this.appService.searchUser(query).subscribe(
           resp => {
             this.users = resp;
+            this.loading = false;
           },
-          err => console.log(err),
-          () => (this.loading = false)
+          err => {
+            this.loading = false;
+            this.error.handleError(err);
+          }
         );
       }
     }
@@ -64,5 +68,9 @@ export class AppComponent {
 
   showPhotos(user) {
     this.selectedUser = user;
+  }
+
+  ngOnDestroy() {
+    this.subscription && this.subscription.unsubscribe();
   }
 }
