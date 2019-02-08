@@ -21,6 +21,7 @@ export class AppComponent implements OnDestroy {
   subscription: Subscription;
   loading: boolean = false;
   resource = "";
+  searchQuery: string;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -48,7 +49,7 @@ export class AppComponent implements OnDestroy {
 
   onKeyUp(e: any) {
     if (this.appService.validKeyStroke(e.keyCode)) {
-      let query = e.target.value;
+      let query = this.searchQuery;
       if (query && query.length > 2) {
         this.loading = true;
         this.users = [];
