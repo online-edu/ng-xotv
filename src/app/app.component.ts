@@ -20,7 +20,7 @@ export class AppComponent implements OnDestroy {
   selectedUser: any;
   subscription: Subscription;
   loading: boolean = false;
-  resource = DATA_NOT_FOUND;
+  resource = "";
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -56,6 +56,7 @@ export class AppComponent implements OnDestroy {
           resp => {
             this.users = resp;
             this.loading = false;
+            this.resource = resp && resp.length == 0 ? DATA_NOT_FOUND : "";
           },
           err => {
             this.loading = false;
