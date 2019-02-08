@@ -7,13 +7,13 @@ import {
   MatIconModule,
   MatInputModule,
   MatListModule,
-  MatProgressSpinnerModule,
   MatRippleModule,
   MatSelectModule,
   MatSidenavModule,
   MatSnackBarModule,
   MatToolbarModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatProgressBarModule
 } from "@angular/material";
 
 const MaterialModules = [
@@ -24,6 +24,7 @@ const MaterialModules = [
   MatIconModule,
   MatInputModule,
   MatListModule,
+  MatProgressBarModule,
   MatRippleModule,
   MatSelectModule,
   MatSidenavModule,

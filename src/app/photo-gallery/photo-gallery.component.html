@@ -1,5 +1,11 @@
-<mat-card>
-  <p>
-    photo-gallery works!
-  </p>
+<mat-card class="xotv-gallery">
+  <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+  <div class="xotv-gallery__grid" *ngIf="photos.length > 0; else empty">
+    <img [src]="photo.urls.thumb" class="xotv-gallery__grid-thumb" *ngFor="let photo of photos" />
+  </div>
+  <ng-template #empty>
+    <div class="xotv-gallery--empty">
+      <img [src]="resource" />
+    </div>
+  </ng-template>
 </mat-card>
