@@ -10,7 +10,13 @@
   .xotv__header {
     z-index: 10;
   }
-  
+
+  .xotv__loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .xotv__sidenav-container {
     flex: 1 1 auto;
     width: 100%;
@@ -24,10 +30,28 @@
     .xotv__sidenav {
       width: 300px;
       max-width: 300px;
+      div.mat-drawer-inner-container {
+        overflow: hidden !important;
+      }
       .xotv__sidenav-search-form {
+        position: fixed;
         padding: 1em;
+        width: 270px;
         .xotv__sidenav-search-field {
           width: 100%;
+        }
+      }
+      .xotv__sidenav-list {
+        margin-top: 70px;
+        height: 100vh;
+        overflow-y: auto;
+        .xotv__sidenav-list--empty {
+          margin: 1em 0;
+          text-align: center;
+          width: 100%;
+          img {
+            width: 260px;
+          }
         }
       }
     }

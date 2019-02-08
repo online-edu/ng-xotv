@@ -15,27 +15,57 @@
         <div class="xotv__sidenav-search-form">
           <form>
             <mat-form-field class="xotv__sidenav-search-field">
-              <input matInput placeholder="Search user" autocomplete="off" />
-              <mat-icon matSuffix>search</mat-icon>
+              <input
+                matInput
+                placeholder="Search user"
+                [(ngModel)]="searchQuery"
+                (keyup)="onKeyUp($event)"
+                name="searchQuery"
+                autocomplete="off"
+              />
+              <mat-icon *ngIf="!searchQuery" matSuffix>search</mat-icon>
+              <button
+                mat-button
+                *ngIf="searchQuery"
+                matSuffix
+                mat-icon-button
+                aria-label="Clear"
+                (click)="searchQuery = ''"
+              >
+                <mat-icon>close</mat-icon>
+              </button>
             </mat-form-field>
           </form>
-        </div>
-        <mat-nav-list>
-          <div>
-            <ng-template #link>
-              <a mat-list-item [routerLink]="menu.link">
-                <mat-icon class="icon" mat-list-icon>2</mat-icon>
-                1
-              </a>
-            </ng-template>
+          <div class="xotv__loader" *ngIf="loading">
+            <app-spinner></app-spinner>
           </div>
-        </mat-nav-list>
+        </div>
+        <div class="xotv__sidenav-list">
+          <mat-nav-list *ngIf="users.length > 0; else empty">
+            <mat-list-item
+              *ngFor="let user of users"
+              (click)="showPhotos(user)"
+            >
+              <img matListAvatar [src]="user?.profile_image?.small" alt="..." />
+              <a matLine>{{ user.name }}</a>
+              <button mat-icon-button (click)="showPhotos(user)">
+                <mat-icon>photo_library</mat-icon>
+              </button>
+            </mat-list-item>
+          </mat-nav-list>
+          <ng-template #empty>
+            <div class="xotv__sidenav-list--empty">
+              <img [src]="resource" />
+            </div>
+          </ng-template>
+        </div>
       </mat-sidenav>
+
       <article>
         <div
           [ngClass]="smallScreen ? 'xotv__container--sm' : 'xotv__container'"
         >
-          <app-photo-gallery></app-photo-gallery>
+          <app-photo-gallery [user]="selectedUser"></app-photo-gallery>
         </div>
       </article>
     </mat-sidenav-container>
