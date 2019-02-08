@@ -24,7 +24,6 @@ const MaterialModules = [
   MatIconModule,
   MatInputModule,
   MatListModule,
-  MatProgressSpinnerModule,
   MatRippleModule,
   MatSelectModule,
   MatSidenavModule,

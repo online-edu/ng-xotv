@@ -7,7 +7,8 @@ import { AppComponent } from "./app.component";
 
 import { CoreModule } from "./core/core.module";
 import { MaterialModule } from "./shared/material/material.module";
-import { PhotoGalleryComponent } from './photo-gallery/photo-gallery.component';
+import { SpinnerModule } from "./shared/components/spinner";
+import { PhotoGalleryComponent } from "./photo-gallery/photo-gallery.component";
 
 @NgModule({
   declarations: [AppComponent, PhotoGalleryComponent],
@@ -16,7 +17,8 @@ import { PhotoGalleryComponent } from './photo-gallery/photo-gallery.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     CoreModule.forRoot(),
-    MaterialModule
+    MaterialModule,
+    SpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
